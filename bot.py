@@ -2,9 +2,9 @@ import telebot
 from telebot import types
 import random
 
-token="6645452788:AAFXSUjM0OTtVSIqkN4lSJjPnCHg_AYP3o0"
+token = "6645452788:AAFXSUjM0OTtVSIqkN4lSJjPnCHg_AYP3o0"
 
-bot=telebot.TeleBot(token)
+bot = telebot.TeleBot(token)
 
 
 class IncrementCounter:
@@ -18,13 +18,10 @@ class IncrementCounter:
     def last_value(self):
         return self._value
 
-
-# Пример использования
-
 counter1 = IncrementCounter()
 counter2 = IncrementCounter()
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands = ["start"])
 def start(message):
     bot.send_message(message.chat.id, "Привет. Давай сыграем в камень-ножницы-бумага.")
     markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -36,7 +33,7 @@ def start(message):
     bot.send_message(message.chat.id,  "Начинай игру. Выбирай!", reply_markup=markup)
 
 
-@bot.message_handler(content_types=["text"])
+@bot.message_handler(content_types = ["text"])
 def answer(message):
     if message.text == "Закончить игру":
         bot.send_message(message.chat.id, f"Игра закончена. Итоговый счёт: {counter1.last_value()} : {counter2.last_value()}.")

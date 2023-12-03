@@ -66,7 +66,7 @@ if __name__ == "__main__":
                     break
                 continue
 
-            if answers and user_city[0].lower()!=answers[-1][-1].lower() and answers[-1][-1].lower() \
+            if answers and user_city[0].lower() != answers[-1][-1].lower() and answers[-1][-1].lower() \
                 not in exclude_letters:
                 user_attempts += 1
                 print("Город должен называться с последней буквы предыдущего города. Попробуйте еще раз.")

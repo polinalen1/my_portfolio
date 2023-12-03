@@ -4,14 +4,14 @@ from telebot import types
 
 token = "6783835964:AAE6eL1PVJiSffXWGkv_BoGjCRUfs6iD9Ek"
 
-bot=telebot.TeleBot(token)
+bot = telebot.TeleBot(token)
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands = ["start"])
 def start(message):
     bot.send_message(message.chat.id, f"Привет, @{str(message.from_user.username)}!")
 
-    markup=types.ReplyKeyboardMarkup()
-    item1=types.KeyboardButton("Случайная статья")
+    markup = types.ReplyKeyboardMarkup()
+    item1 = types.KeyboardButton("Случайная статья")
     markup.add(item1)
     bot.send_message(message.chat.id, """
     Данный бот создан для нахождения любой статьи на Wikipedia.com.
@@ -34,10 +34,10 @@ def random_page(message):
     except Exception as e:
         bot.send_message(message.chat.id, f"Произошла ошибка: {e}")
 def wiki_search(message):
-    wanted_page=message.text
+    wanted_page = message.text
     try:
-        page=wikipedia.summary(wanted_page)
-        summary=wikipedia.summary(page)
+        page = wikipedia.summary(wanted_page)
+        summary = wikipedia.summary(page)
         max_length = 4096
         while summary:
             bot.send_message(message.chat.id, summary[:max_length])

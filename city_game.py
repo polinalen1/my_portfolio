@@ -11,7 +11,7 @@ def user_answer():
     city = input("Введите название города: ").title()
     return city
 
-def comp_answer(previous_city, answers=None):
+def comp_answer(previous_city, answers = None):
     last_letter = previous_city[-1].lower()
     if last_letter in exclude_letters:
         cities = [city for city in cities_list if city[0].lower() == previous_city[0].lower()]

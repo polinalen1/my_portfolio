@@ -57,7 +57,7 @@ def quality(message):
     except IndexError:
         bot.send_message(message.chat.id, "Введите цифру после команды /quality.")
 
-@bot.message_handler(commands=["notes"])
+@bot.message_handler(commands = ["notes"])
 def notes(message):
     note = message.text.split("/notes", 1)[1].strip()
     user_id = message.from_user.id

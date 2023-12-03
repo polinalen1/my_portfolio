@@ -3,22 +3,22 @@ import random
 
 def user_answer():
     if previous_city:
-        last_letter=previous_city[-1].lower()
+        last_letter = previous_city[-1].lower()
         if last_letter in exclude_letters:
             print("Город заканчивается на букву, на которую нельзя назвать город. Введите город на первую букву предыдущего слова: ")
-            city=input("Введите название города, для выхода из игры - выход: ").title()
+            city = input("Введите название города, для выхода из игры - выход: ").title()
             return city
     city = input("Введите название города: ").title()
     return city
 
 def comp_answer(previous_city, answers=None):
-    last_letter=previous_city[-1].lower()
+    last_letter = previous_city[-1].lower()
     if last_letter in exclude_letters:
-        cities=[city for city in cities_list if city[0].lower()==previous_city[0].lower()]
+        cities = [city for city in cities_list if city[0].lower() == previous_city[0].lower()]
     else:
-        cities=[city for city in cities_list if city[0].lower()==previous_city[-1]]
-    unused_cities=[city for city in cities if city not in answers]
-    current_city=random.choice(unused_cities)
+        cities = [city for city in cities_list if city[0].lower() == previous_city[-1]]
+    unused_cities = [city for city in cities if city not in answers]
+    current_city = random.choice(unused_cities)
     return current_city
 
 def save_game(game):
@@ -27,20 +27,20 @@ def save_game(game):
 
 if __name__ == "__main__":
     with open("C:\\Users\\Полина\\Desktop\\cities.txt", 'r', encoding='utf-8') as f:
-        cities_list=f.read().splitlines()
+        cities_list = f.read().splitlines()
 
-    answers=[]
-    previous_city=""
+    answers = []
+    previous_city = ""
     exclude_letters = ["ы", "ь", "ъ"]
 
     def play_game():
 
         global user_attempts
-        user_attempts=0
+        user_attempts = 0
 
         while True:
-            user_city=user_answer()
-            if user_city.lower()=="выход":
+            user_city = user_answer()
+            if user_city.lower() == "выход":
                 print("Игра закончена.")
                 break
 
@@ -49,18 +49,18 @@ if __name__ == "__main__":
                 continue
 
             if user_city not in cities_list:
-                user_attempts+=1
+                user_attempts += 1
                 print("Такого города не существует. Попробуйте еще раз.")
-                if user_attempts>=5:
+                if user_attempts >= 5:
                     print("Ваша попытки закончились. Игра проиграна.")
                     save_game("Поражение игрока")
                     break
                 continue
 
             if user_city in answers:
-                user_attempts+=1
+                user_attempts += 1
                 print("Такой город уже был. Попробуйте еще раз.")
-                if user_attempts>=5:
+                if user_attempts >= 5:
                     print("Ваша попытки закончились. Игра проиграна.")
                     save_game("Поражение игрока")
                     break
@@ -77,9 +77,9 @@ if __name__ == "__main__":
                 continue
 
             answers.append(user_city)
-            previous_city=user_city
+            previous_city = user_city
             save_game("Пользователь:" + user_city)
-            comp_city=comp_answer(previous_city, answers)
+            comp_city = comp_answer(previous_city, answers)
             if not comp_city:
                 print("Компьютер не смог найти подходящий город. Вы победили!")
                 save_game("Поражение компьютера")
